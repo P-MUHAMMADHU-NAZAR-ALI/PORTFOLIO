@@ -9,8 +9,10 @@ const Contact = () => {
     email: "",
     message: "",
   });
+
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [success, setSuccess] = useState(null);
+  const [errorMessage, setErrorMessage] = useState(""); // New: Store error messages
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -19,25 +21,42 @@ const Contact = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setSuccess(null);
+    setErrorMessage(""); // Reset error message
+
+    const accessKey = import.meta.env.VITE_WEB3_FORM_API || process.env.VITE_WEB3_FORM_API;
+    console.log("API Key:", accessKey); // Debugging log
+
+    if (!accessKey) {
+      setErrorMessage("API Key is missing. Please check your .env file.");
+      setIsSubmitting(false);
+      return;
+    }
 
     try {
       const response = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          access_key: import.meta.env.VITE_WEB3_FORM_API,
+          access_key: accessKey,
           ...formData,
         }),
       });
 
-      if (response.ok) {
+      const result = await response.json();
+      console.log("API Response:", result); // Debugging log
+
+      if (response.ok && result.success) {
         setSuccess(true);
         setFormData({ name: "", email: "", message: "" });
       } else {
         setSuccess(false);
+        setErrorMessage(result.message || "Failed to send the message.");
       }
     } catch (error) {
+      console.error("Error:", error);
       setSuccess(false);
+      setErrorMessage("An error occurred. Please try again later.");
     } finally {
       setIsSubmitting(false);
     }
@@ -47,9 +66,7 @@ const Contact = () => {
     <div id="contact" className="bg-[#ffffff] min-h-screen flex items-center justify-center">
       <div className="max-w-[90%] md:max-w-[75%] mx-auto font-inter space-y-10 py-10">
         <div className="text-center">
-          <h2 className="text-4xl md:text-5xl font-bold text-center text-[#fe5617]">
-            Get in touch
-          </h2>
+          <h2 className="text-4xl md:text-5xl font-bold text-[#fe5617]">Get in touch</h2>
         </div>
         <div className="flex flex-col items-center md:flex-row gap-[150px] justify-center">
           <div className="flex flex-col space-y-5 text-lg md:text-xl font-semibold">
@@ -68,22 +85,13 @@ const Contact = () => {
             <div className="flex flex-col items-center gap-3">
               <h2 className="text-xl font-bold">Follow on</h2>
               <div className="flex gap-4">
-                <a
-                  href="https://github.com/P-MUHAMMADHU-NAZAR-ALI"
-                  className="hover:text-[#fe5617]"
-                >
+                <a href="https://github.com/P-MUHAMMADHU-NAZAR-ALI" className="hover:text-[#fe5617]">
                   <FaGithub size={29} />
                 </a>
-                <a
-                  href="https://www.linkedin.com/in/muhammadhunazar/"
-                  className="hover:text-[#fe5617]"
-                >
+                <a href="https://www.linkedin.com/in/muhammadhunazar/" className="hover:text-[#fe5617]">
                   <FaLinkedin size={29} />
                 </a>
-                <a
-                  href="https://www.instagram.com/nxzxr__.03/"
-                  className="hover:text-[#fe5617]"
-                >
+                <a href="https://www.instagram.com/nxzxr__.03/" className="hover:text-[#fe5617]">
                   <FaInstagram size={29} />
                 </a>
               </div>
@@ -91,13 +99,8 @@ const Contact = () => {
           </div>
 
           {/* Contact Form */}
-          <form
-            onSubmit={handleSubmit}
-            className="flex flex-col gap-5 w-full max-w-md"
-          >
-            <h2 className="text-2xl font-bold text-[#fe5617] text-center">
-              Send a Message
-            </h2>
+          <form onSubmit={handleSubmit} className="flex flex-col gap-5 w-full max-w-md">
+            <h2 className="text-2xl font-bold text-[#fe5617] text-center">Send a Message</h2>
             <input
               type="text"
               name="name"
@@ -131,16 +134,8 @@ const Contact = () => {
             >
               {isSubmitting ? "Sending..." : "Send Message"}
             </button>
-            {success === true && (
-              <p className="text-green-500 text-center">
-                Message sent successfully!
-              </p>
-            )}
-            {success === false && (
-              <p className="text-red-500 text-center">
-                Failed to send the message. Try again.
-              </p>
-            )}
+            {success === true && <p className="text-green-500 text-center">Message sent successfully!</p>}
+            {success === false && <p className="text-red-500 text-center">{errorMessage}</p>}
           </form>
         </div>
       </div>
