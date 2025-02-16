@@ -9,7 +9,7 @@ const Home = () => {
         {/* Left Section */}
         <div className="order-2 lg:order-1 flex flex-col items-center md:items-start justify-start space-y-5 text-center md:text-left">
           <h1 className="text-3xl md:text-5xl font-bold">
-            I’m <span className="text-[#fe5617]">Mohammed Imran</span>
+            I’m <span className="text-[#fe5617]">Muhammadhu Nazar ali</span>
           </h1>
           <h2 className="text-2xl md:text-3xl font-bold flex gap-2">
             <span className="text-[#fe5617]">I’m a</span>
@@ -17,8 +17,6 @@ const Home = () => {
               options={{
                 strings: [
                   "Developer.",
-                  "Tutor.",
-                  "Content Creator.",
                   "Designer.",
                 ],
                 autoStart: true,
@@ -28,31 +26,31 @@ const Home = () => {
               }}
             />
           </h2>
-          {/* About Me */}
+          {/* About Me
           <p className="text-lg md:text-xl text-gray-700 font-medium">
-            A passionate MERN stack developer with 2 year of experience,
-            dedicated to building user-friendly web applications. I thrive on
-            learning and sharing knowledge as a tutor and content creator.
-          </p>
+          Dedicated and proactive B. Tech Computer Science student with a strong passion for problem-solving and research. As an 
+          engineering student, I focus on delivering useful outcomes through my projects. Known for managing tasks efficiently and 
+          facing challenges with confidence.  
+          </p> */}
 
           {/* Contact Information */}
           <div className=" flex flex-col space-y-3 md:space-y-0 md:flex-row md:gap-6 text-lg md:text-xl font-semibold ">
             <div className="flex items-center gap-3">
               <FaLocationDot className="text-[#fe5617]" size={20} />
-              <span>Pondicherry</span>
+              <span>Tenkasi</span>
             </div>
             <div className="flex items-center gap-3">
               <FaPhoneAlt className="text-[#fe5617]" size={20} />
-              <span>9092595881</span>
+              <span>6381920315</span>
             </div>
             <div className="flex items-center gap-3">
               <FaEnvelope className="text-[#fe5617]" size={20} />
-              <span>immucoder@gmail.com</span>
+              <span>nazarmuhammed740@gmail.com</span>
             </div>
           </div>
           {/* Button */}
           <div className="bg-[#fe5617] px-5 py-2 rounded-2xl font-bold ">
-            <a href="">Download CV</a>
+            <a href="public\RESUME.pdf">Download CV</a>
           </div>
         </div>
 
@@ -60,7 +58,7 @@ const Home = () => {
         <div className="order-1 lg:order-2 flex justify-end items-center">
           <img
             className="w-[85%] rounded-[50px]"
-            src="/profile.jpg"
+            src="/my.jpg"
             alt="Profile"
           />
         </div>

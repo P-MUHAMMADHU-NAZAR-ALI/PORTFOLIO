@@ -12,7 +12,7 @@ const Header = () => {
         {/* Logo */}
         <div>
           <h1 className="text-[2.5rem] font-bold text-[#000] hover:text-[#fe5617] ">
-            Imran.
+            NAZAR.
           </h1>
         </div>
 
@@ -83,19 +83,19 @@ const Header = () => {
         {/* Social Media Links */}
         <div className="hidden lg:flex w-[100px] items-center justify-between">
           <a
-            href="https://github.com/AMOHAMMEDIMRAN"
+            href="https://github.com/P-MUHAMMADHU-NAZAR-ALI"
             className="hover:text-[#fe5617]"
           >
             <FaGithub size={29} />
           </a>
           <a
-            href="https://www.linkedin.com/in/mohammedimrana/"
+            href="https://www.linkedin.com/in/muhammadhunazar/"
             className="hover:text-[#fe5617]"
           >
             <FaLinkedin size={29} />
           </a>
           <a
-            href="https://www.instagram.com/immucoder/?__pwa=1"
+            href="https://www.instagram.com/nxzxr__.03/"
             className="hover:text-[#fe5617]"
           >
             <FaInstagram size={29} />
